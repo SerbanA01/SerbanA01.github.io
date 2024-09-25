@@ -33,64 +33,101 @@ function scrollFunction() {
 function resetAnimations() {
     const slides = document.querySelectorAll('.w-slide');
     slides.forEach((slide) => {
-      slide.classList.remove('animate-slide');
+        slide.classList.remove('animate-slide');
     });
-  }
-  
-  // Function to trigger animation on the active slide
-  function triggerAnimationOnSlide(slide) {
+}
+
+// Function to trigger animation on the active slide
+function triggerAnimationOnSlide(slide) {
     if (!slide) return; // Ensure the slide exists before applying the animation
     resetAnimations(); // Remove animations from all slides
     slide.classList.add('animate-slide'); // Add animation class to the active slide
-  }
-  
-  // Function to get the active slide by finding the active dot
-  function getActiveSlide() {
+}
+
+// Function to get the active slide by finding the active dot
+function getActiveSlide() {
     const activeDot = document.querySelector('.w-slider-dot.w-active'); // Find the active dot
     if (activeDot) {
-      const dots = Array.from(document.querySelectorAll('.w-slider-dot')); // Get all dots
-      const activeIndex = dots.indexOf(activeDot); // Find the index of the active dot
-      const slides = document.querySelectorAll('.w-slide'); // Get all slides
-      return slides[activeIndex] || null; // Return the slide at the active index
+        const dots = Array.from(document.querySelectorAll('.w-slider-dot')); // Get all dots
+        const activeIndex = dots.indexOf(activeDot); // Find the index of the active dot
+        const slides = document.querySelectorAll('.w-slide'); // Get all slides
+        return slides[activeIndex] || null; // Return the slide at the active index
     }
     return null;
-  }
-  
-  // Function to observe changes in the slider dots
-  function observeSliderDots() {
+}
+
+// Function to observe changes in the slider dots
+function observeSliderDots() {
     const observer = new MutationObserver((mutationsList) => {
-      for (let mutation of mutationsList) {
-        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-          if (mutation.target.classList.contains('w-active')) {
-            
-            const activeSlide = getActiveSlide(); // Get the active slide
-            if (activeSlide) {
-              triggerAnimationOnSlide(activeSlide);
+        for (let mutation of mutationsList) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                if (mutation.target.classList.contains('w-active')) {
+
+                    const activeSlide = getActiveSlide(); // Get the active slide
+                    if (activeSlide) {
+                        triggerAnimationOnSlide(activeSlide);
+                    }
+                }
             }
-          }
         }
-      }
     });
-  
+
     // Observe all slider dots for changes in their 'class' attribute
     const dots = document.querySelectorAll('.w-slider-dot');
     dots.forEach((dot) => observer.observe(dot, { attributes: true }));
-  }
-  
-  // Wait until Webflow finishes initializing
-  document.addEventListener('DOMContentLoaded', function () {
-  
-  
+}
+
+
+// Wait until Webflow finishes initializing
+document.addEventListener('DOMContentLoaded', function () {
+
+
     // Delay execution to ensure Webflow slider is initialized
     setTimeout(function () {
-      const activeSlide = getActiveSlide(); // Get the active slide based on the active dot
-      if (activeSlide) {
-        
-        triggerAnimationOnSlide(activeSlide);
-      } 
-  
-      // Start observing for changes in the slider dots
-      observeSliderDots();
+        const activeSlide = getActiveSlide(); // Get the active slide based on the active dot
+        if (activeSlide) {
+
+            triggerAnimationOnSlide(activeSlide);
+        }
+
+        // Start observing for changes in the slider dots
+        observeSliderDots();
     }, 500); // 500ms delay to give time for slider initialization
-  });
-  
+
+    // counting for the years
+    // Select the counter element
+    const counterElement = document.querySelector('.counter');
+
+    // Create the counter function
+    function startCounting() {
+        let count = 0;
+        const targetCount = 10;
+        const interval = 1000; // Time in milliseconds between counts
+        const stepTime = Math.abs(Math.floor(interval / targetCount));
+
+        const counterInterval = setInterval(() => {
+            counterElement.textContent = count;
+            if (count >= targetCount) {
+                clearInterval(counterInterval);
+            }
+            count++;
+        }, stepTime);
+    }
+
+    // Create an IntersectionObserver to trigger the counter when it comes into view
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                startCounting(); // Start counting when the element is in view
+                observer.unobserve(counterElement); // Stop observing once counting starts
+            }
+        });
+    });
+
+    // Observe the counter element
+    observer.observe(counterElement);
+
+
+});
+
+
