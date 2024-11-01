@@ -1,11 +1,19 @@
-
+.container_image {
+    background: url('../images/blurry-picture-of-shelves-in-contemporary-warehouse-photo-p-1080.jpg') no-repeat center center;
+    height: 70vh;
+    background-size: cover;
+}
 .hero-stack-2 {
     background-color: #f5f7fa;
     border-bottom: 1px #e4ebf3;
     padding: 10px 30px 80px;
     position: relative;
 }
-
+#no-background{
+    background:none !important;
+    border:none !important;
+    padding:0 !important;
+}
 .container-13 {
     width: 100%;
     max-width: 940px;
@@ -97,10 +105,12 @@
     background-color: var(--flowui-component-library--gray-200);
     border-color: #0000;
 }
-
+.w-button{
+    background-color: #004d7a;
+}
 .f-button-neutral-3 {
-    background-color: var(--flowui-component-library--gray-900);
-    color: var(--flowui-component-library--white);
+    background-color: #004d7a;
+    color: white;
     text-align: center;
     letter-spacing: -.02em;
     border-radius: 50px;
@@ -287,12 +297,26 @@
     align-items: flex-start;
     max-width: 46%;
     display: flex;
+    border-radius: 5px;
+ 
 }
-
+.my-hero{
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+    padding-left: 5vw;
+    padding-right: 1vw;
+    max-width: 80%;
+}
+#no-margin{
+    margin:0 !important;
+}
 .shadow-two-4 {
     box-shadow: 0 4px 24px #96a3b514;
 }
-
+.w-layout-blockcontainer {
+    display: flex !important;
+    align-items: center;
+}
 .hero-heading-right {
     background-color: #f5f7fa;
     border-bottom: 1px solid #e4ebf3;
