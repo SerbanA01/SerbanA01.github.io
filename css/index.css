@@ -54,8 +54,10 @@ img {
   position: fixed;
   transition: padding 0.3s ease-in-out;
 }
-#logo_erax{
-  height: 15vh;  /* Set the initial height */
+
+#logo_erax {
+  height: 80px;
+  /* Set the initial height */
   max-height: 110px;
   width: 130px;
   transition: height 0.3s ease-in-out, width 0.3s ease-in-out;
@@ -148,10 +150,33 @@ img {
 }
 
 .nav-dropdown-list {
-  background-color: #fff;
-  border-radius: 12px;
-}
 
+  display: none; /* Initially hide the dropdown */
+
+  background-color: #fff;
+  /* border-radius: 12px; */
+
+  transform-origin: top center;
+  transform: scaleY(0);
+  transition: transform 300ms ease-in-out;
+}
+.nav-dropdown:hover .nav-dropdown-list,
+.nav-dropdown-toggle:hover + .nav-dropdown-list {
+  display: block; /* Show the dropdown on hover */
+  animation: growDown 300ms ease-in-out forwards;
+
+}
+@keyframes growDown {
+  0% {
+    transform: scaleY(0);
+  }
+  80% {
+    transform: scaleY(1.1);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
 .nav-dropdown-list.w--open {
   padding-top: 10px;
   padding-bottom: 10px;
@@ -162,6 +187,38 @@ img {
   padding-bottom: 5px;
   font-size: 14px;
 }
+.nav-dropdown-link {
+  position: relative;
+  color: #666;
+  text-decoration: none;
+}
+
+.nav-dropdown-link:hover::after,
+.nav-dropdown-link:hover::before {
+  width: 100%;
+  left: 0;
+}
+
+.nav-dropdown-link::after,
+.nav-dropdown-link::before {
+  content: ''; 
+  position: absolute;
+  top: 100%;
+  width: 0;
+  right: 0;
+  height: 3px;
+}
+
+.nav-dropdown-link::before {
+  transition: width .4s cubic-bezier(0.51, 0.18, 0, 0.88) .1s;
+  background: #0050bd;
+}
+
+.nav-dropdown-link::after {
+  transition: width .2s cubic-bezier(0.29, 0.18, 0.26, 0.83);
+  background: #9ac6c5;
+}
+
 
 .nav-dropdown-link:focus-visible {
   outline-offset: 0px;
@@ -203,6 +260,16 @@ img {
 
 .button-primary {
   color: #fff;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background-color: #1a1b1f;
+  padding: 12px 25px;
+  font-size: 12px;
+  line-height: 20px;
+  transition: all .2s;
+}
+
+.button_slider {
   letter-spacing: 2px;
   text-transform: uppercase;
   background-color: #1a1b1f;
@@ -269,15 +336,17 @@ img {
 .text-block {
   color: #fff;
 }
+
 .text-block:hover {
-  color: #004d7a ;
+  color: #004d7a;
 }
 
-.text-block:hover ~ .nav-dropdown-icon {
-  color: #004d7a ;
+.text-block:hover~.nav-dropdown-icon {
+  color: #004d7a;
 }
+
 .nav-dropdown-icon:hover {
-  color: #004d7a ;
+  color: #004d7a;
 }
 
 .hero-heading-center {
@@ -310,9 +379,20 @@ img {
   display: flex;
 }
 
+#model-container {
+  width: 100%; /* Make sure the model container takes up the full width of its parent */
+  height: auto; /* Let height be determined by content or the renderer */
+}
+
+canvas {
+  width: 100% !important; /* Make the canvas responsive */
+  height: auto !important; /* The height will adjust proportionally */
+  display: block;
+}
+
 .margin-bottom-24px {
   margin-bottom: 24px;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .shadow-two {
@@ -444,7 +524,8 @@ img {
   line-height: 23px;
 }
 
-.slide, .image-6 {
+.slide,
+.image-6 {
   opacity: 1;
 }
 
@@ -461,6 +542,7 @@ img {
 .image-7 {
   width: 100%;
 }
+
 .hero-without-image {
   background-color: #f5f7fa;
   border-bottom: 1px solid #e4ebf3;
@@ -468,19 +550,23 @@ img {
   position: relative;
   overflow: hidden;
 }
+
 .overlay-svg {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none; /* Ensure the SVG doesn't block interactions */
+  pointer-events: none;
+  /* Ensure the SVG doesn't block interactions */
 }
+
 /* this below is for bezier coloring */
 
 .hero-wrapper-two span {
   transition: color 0.3s;
 }
+
 .container-4 {
   width: 100%;
   max-width: 940px;
@@ -550,7 +636,8 @@ img {
   font-weight: 700;
   position: static;
 }
-#plus{
+
+#plus {
   color: #004d7a;
   font-size: 48px;
   font-weight: 700;
@@ -620,7 +707,7 @@ img {
 }
 
 .footer-link:hover {
-  color: #1a1b1fbf;
+  color: #004d7a;
 }
 
 .footer-social-block {
@@ -663,12 +750,13 @@ img {
   object-fit: fill;
 }
 
-.image-8.slider_image, .slider_image {
+.image-8.slider_image,
+.slider_image {
   width: 100%;
 }
 
 .image_slider {
-  position:absolute;
+  position: absolute;
   z-index: 1;
   width: 100%;
   height: 100%;
@@ -697,6 +785,7 @@ img {
     transform: translateY(50px);
     opacity: 0;
   }
+
   100% {
     transform: translateY(0);
     opacity: 1;
@@ -707,6 +796,7 @@ img {
   0% {
     filter: brightness(1);
   }
+
   100% {
     filter: brightness(0.6);
   }
@@ -799,7 +889,8 @@ img {
     margin-bottom: 40px;
   }
 
-  .container-4, .container-6 {
+  .container-4,
+  .container-6 {
     max-width: 728px;
   }
 
@@ -937,15 +1028,19 @@ img {
     margin-bottom: 24px;
   }
 
-  .container-4, .container-6 {
+  .container-4,
+  .container-6 {
     max-width: none;
   }
 
-  .left-arrow-2, .right-arrow-2 {
+  .left-arrow-2,
+  .right-arrow-2 {
     opacity: 0;
   }
 }
 
-#w-node-b80f9da6-6d61-c965-d85d-4f144832f598-afaf9c50, #w-node-b80f9da6-6d61-c965-d85d-4f144832f5a1-afaf9c50, #w-node-b80f9da6-6d61-c965-d85d-4f144832f5ac-afaf9c50 {
+#w-node-b80f9da6-6d61-c965-d85d-4f144832f598-afaf9c50,
+#w-node-b80f9da6-6d61-c965-d85d-4f144832f5a1-afaf9c50,
+#w-node-b80f9da6-6d61-c965-d85d-4f144832f5ac-afaf9c50 {
   grid-area: span 1 / span 1 / span 1 / span 1;
 }

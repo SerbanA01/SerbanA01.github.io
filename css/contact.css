@@ -1,0 +1,60 @@
+.contact {
+    padding-top: 7.5rem ;
+    background-color: #f5f7fa;
+    padding-bottom: 80px;
+}
+
+
+p {
+    font-size: 1rem;
+}
+
+.introducere-contact {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.container-10 {
+    width: 100%;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-wrapper-3 {
+    grid-column-gap: 18px;
+    grid-row-gap: 17px;
+    grid-template-rows: auto;
+    grid-template-columns: 1.75fr 1fr;
+    grid-auto-columns: 1fr;
+    justify-content: space-between;
+    align-items: center;
+    display: grid;
+}
+.contact-info{
+    display: flex;
+    justify-content:space-around ;
+    margin-top: 1.5rem;
+}
+.centered-heading-4 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#header-text {
+    text-align: center;
+}
+
+.grid-contact {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    grid-gap: 30px;
+    padding: 10px;
+    width: 90%;
+    margin: 50px auto 0;
+}

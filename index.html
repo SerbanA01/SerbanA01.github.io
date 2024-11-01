@@ -12,13 +12,13 @@
 
   <!-- bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-  integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css"
-  rel="stylesheet">
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css"
+    rel="stylesheet">
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-  crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
   <!-- bootstrap -->
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
   <link href="css/webflow.css" rel="stylesheet" type="text/css">
@@ -36,39 +36,39 @@
         class="navbar-logo-left-container shadow-three w-nav">
         <div class="container">
           <div class="navbar-wrapper">
-            <a href="index.html" class="navbar-brand w-nav-brand"><img src="images/logo_transparent_2_alb.png"
-                loading="lazy" width="121" alt="EraX logo" id="logo_erax"></a>
+            <a href="index.html" class="navbar-brand w-nav-brand"><img src="images/logo_text.png" loading="lazy"
+                width="121" alt="EraX logo" id="logo_erax"></a>
             <nav role="navigation" class="nav-menu-wrapper w-nav-menu">
               <ul role="list" class="nav-menu-two w-list-unstyled">
                 <li>
-                  <a href="#" class="nav-link">Acasa</a>
+                  <a href="index.html" class="nav-link">Acasa</a>
                 </li>
                 <li>
                   <div data-hover="false" data-delay="0" class="nav-dropdown w-dropdown">
                     <div class="nav-dropdown-toggle w-dropdown-toggle">
-                      <div class="text-block">Servicii</div>
+                      <div class="text-block"> <a href="servicii.html" class="nav-link">Servicii</a></div>
                       <div class="nav-dropdown-icon w-icon-dropdown-toggle"></div>
 
                     </div>
                     <nav class="nav-dropdown-list shadow-three mobile-shadow-hide w-dropdown-list">
-                      <a href="#" class="nav-dropdown-link w-dropdown-link">Structuri metalice</a>
-                      <a href="#" class="nav-dropdown-link w-dropdown-link">Piese și accesorii metalice</a>
-                      <a href="#" class="nav-dropdown-link w-dropdown-link">Metalurgie arhitecturală</a>
-                      <a href="#" class="nav-dropdown-link w-dropdown-link">Cum lucrăm</a>
+                      <a href="servicii.html#structuri_metalice" data-target="50c8ddce-f1f3-cf41-c53a-a46533e4eb62"
+                        class="nav-dropdown-link w-dropdown-link">Structuri metalice</a>
+                      <a href="servicii.html#piese_agricole" class="nav-dropdown-link w-dropdown-link">Piese și accesorii metalice</a>
+                      <a href="servicii.html#metalurgie_arhitecturala" class="nav-dropdown-link w-dropdown-link">Metalurgie arhitecturală</a>
                     </nav>
                   </div>
                 </li>
                 <li>
-                  <a href="#" class="nav-link">Despre Noi</a>
+                  <a href="despre-noi.html" class="nav-link">Despre Noi</a>
                 </li>
                 <li>
-                  <a href="#" class="nav-link">Estimator costuri</a>
+                  <a href="estimator-cost.html" class="nav-link">Estimator costuri</a>
                 </li>
                 <li>
-                  <a href="#" class="nav-link">Portofoliu</a>
+                  <a href="portofoliu.html" class="nav-link">Portofoliu</a>
                 </li>
                 <li>
-                  <a href="#" class="nav-link">Contact</a>
+                  <a href="contact.html" class="nav-link">Contact</a>
                 </li>
                 <li>
                   <div class="nav-divider"></div>
@@ -146,9 +146,9 @@
             tău.</p>
           <a href="#" class="button-primary w-button">Estimator cost</a>
         </div>
-        <div class="hero-split"><img src="images/test5.jpg" loading="lazy"
-            sizes="(max-width: 479px) 94vw, (max-width: 767px) 95vw, (max-width: 991px) 92vw, 43vw"
-            srcset="images/test5-p-500.jpg 500w, images/test5-p-800.jpg 800w, images/test5.jpg 1024w" alt=""></div>
+        <div class="hero-split" id="model-container">
+
+        </div>
       </div>
     </div>
   </section>
@@ -160,7 +160,7 @@
     <div class="container-4">
       <div class="hero-wrapper-two">
         <h1><strong>Cine suntem</strong></h1>
-        <div class="text-block-4" >Meșteri în fabricarea structurilor metalice.</div>
+        <div class="text-block-4">Meșteri în fabricarea structurilor metalice.</div>
         <div class="w-layout-blockcontainer container-5 w-container">
           <div class="counter">10</div><span id="plus">+</span>
           <div class="counter_text">ani de experienta</div>
@@ -177,14 +177,13 @@
   <section class="footer-dark">
     <div class="container-6">
       <div class="footer-wrapper">
-        <a href="#" class="footer-brand w-inline-block"><img src="images/logo_transparent_2_alb.png" loading="lazy"
-            alt=""></a>
+        <a href="#" class="footer-brand w-inline-block"><img src="images/logo_text.png" loading="lazy" alt=""></a>
         <div class="footer-content">
           <div id="w-node-b80f9da6-6d61-c965-d85d-4f144832f598-afaf9c50" class="footer-block">
             <div class="title-small">Erax</div>
-            <a href="#" class="footer-link">Contact</a>
-            <a href="#" class="footer-link">Estimator de cost</a>
-            <a href="#" class="footer-link">Portofoliu</a>
+            <a href="contact.html" class="footer-link">Contact</a>
+            <a href="estimator-cost.html" class="footer-link">Estimator de cost</a>
+            <a href="portofoliu.html" class="footer-link">Portofoliu</a>
           </div>
           <div id="w-node-b80f9da6-6d61-c965-d85d-4f144832f5a1-afaf9c50" class="footer-block">
             <div class="title-small">Resurse</div>
@@ -210,6 +209,10 @@
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=66f10dfae5204c08afaf9c48"
     type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
     crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
   <script src="js/webflow.js" type="text/javascript"></script>
   <script src="js/index.js" type="text/javascript"></script>
 </body>
