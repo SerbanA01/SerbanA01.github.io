@@ -111,7 +111,7 @@ const Portofoliu = () => {
   const getCategoryColor = (category) => {
     const colors = {
       structuri_metalice: 'bg-primary-100 text-primary-700 border-primary-300',
-      piese_agricole: 'bg-accent-100 text-accent-700 border-accent-300',
+      piese_agricole: 'bg-primary-100 text-primary-700 border-primary-300',
       metalurgie_arhitecturala: 'bg-purple-100 text-purple-700 border-purple-300'
     }
     return colors[category] || 'bg-gray-100 text-gray-700 border-gray-300'

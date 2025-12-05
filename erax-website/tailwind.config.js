@@ -19,6 +19,8 @@ export default {
           800: '#002b4d',
           900: '#00131a',
         },
+        // Orange accent colors commented out - using only blue throughout
+        /*
         accent: {
           50: '#fff5e6',
           100: '#ffe0b3',
@@ -31,6 +33,7 @@ export default {
           800: '#663900',
           900: '#331d00',
         }
+        */
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

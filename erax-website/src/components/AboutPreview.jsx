@@ -8,7 +8,7 @@ const AboutPreview = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCount((prevCount) => {
-        if (prevCount < 10) {
+        if (prevCount < 15) {
           return prevCount + 1
         }
         clearInterval(timer)
@@ -47,7 +47,7 @@ const AboutPreview = () => {
                 <span className="text-6xl md:text-7xl font-bold text-white">
                   {count}
                 </span>
-                <span className="text-5xl md:text-6xl font-bold text-accent-400 ml-2">
+                <span className="text-5xl md:text-6xl font-bold text-primary-200 ml-2">
                   +
                 </span>
               </div>
@@ -67,19 +67,19 @@ const AboutPreview = () => {
           {/* Features Grid */}
           <div className="grid md:grid-cols-4 gap-8 mb-12">
             <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300">
-              <Award className="w-12 h-12 text-accent-400 mx-auto mb-4" />
+              <Award className="w-12 h-12 text-primary-200 mx-auto mb-4" />
               <h3 className="text-white font-semibold text-lg">Calitate Superioară</h3>
             </div>
             <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300">
-              <Users className="w-12 h-12 text-accent-400 mx-auto mb-4" />
+              <Users className="w-12 h-12 text-primary-200 mx-auto mb-4" />
               <h3 className="text-white font-semibold text-lg">Echipă Experimentată</h3>
             </div>
             <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300">
-              <Wrench className="w-12 h-12 text-accent-400 mx-auto mb-4" />
+              <Wrench className="w-12 h-12 text-primary-200 mx-auto mb-4" />
               <h3 className="text-white font-semibold text-lg">Soluții Complete</h3>
             </div>
             <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300">
-              <TrendingUp className="w-12 h-12 text-accent-400 mx-auto mb-4" />
+              <TrendingUp className="w-12 h-12 text-primary-200 mx-auto mb-4" />
               <h3 className="text-white font-semibold text-lg">Inovație Continuă</h3>
             </div>
           </div>

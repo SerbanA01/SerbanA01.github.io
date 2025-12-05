@@ -98,12 +98,12 @@ const Contact = () => {
         </div>
 
         {/* Decorative circles */}
-        <div className="absolute top-20 left-10 w-72 h-72 bg-accent-500/20 rounded-full blur-3xl" />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-primary-500/20 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary-400/20 rounded-full blur-3xl" />
 
         <div className="container-custom relative z-10 text-center">
           <div className="inline-flex items-center justify-center w-20 h-20 bg-white/10 backdrop-blur-sm rounded-full mb-6">
-            <Mail className="w-10 h-10 text-accent-400" />
+            <Mail className="w-10 h-10 text-primary-400" />
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
             Transformă-ți proiectul în realitate
@@ -184,7 +184,7 @@ const Contact = () => {
 
             {/* Contact Form - Right Side (2 columns) - More Attractive */}
             <div className="lg:col-span-2">
-              <div className="bg-gradient-to-br from-primary-50 via-white to-accent-50 rounded-2xl p-8 shadow-2xl border-2 border-primary-100">
+              <div className="bg-gradient-to-br from-primary-50 via-white to-primary-50 rounded-2xl p-8 shadow-2xl border-2 border-primary-100">
                 <div className="flex items-center space-x-3 mb-6">
                   <div className="bg-gradient-to-br from-primary-600 to-primary-800 rounded-lg p-3">
                     <Send className="w-6 h-6 text-white" />
@@ -309,7 +309,7 @@ const Contact = () => {
       </section>
 
       {/* Call-to-Action Section - More Engaging */}
-      <section className="py-20 bg-gradient-to-r from-accent-500 via-accent-600 to-accent-700 relative overflow-hidden">
+      <section className="py-20 bg-gradient-to-r from-primary-500 via-primary-600 to-primary-700 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div 
             className="absolute inset-0"
@@ -326,18 +326,18 @@ const Contact = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Ai nevoie de ajutor imediat?
           </h2>
-          <p className="text-xl text-accent-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
             Sună-ne acum și vorbește direct cu un specialist EraX
           </p>
           
           <a
             href="tel:+40123456789"
-            className="inline-flex items-center space-x-3 bg-white text-accent-700 hover:bg-gray-100 font-bold py-4 px-8 rounded-lg transition-all duration-300 shadow-2xl hover:shadow-3xl transform hover:-translate-y-1"
+            className="inline-flex items-center space-x-3 bg-white text-primary-700 hover:bg-gray-100 font-bold py-4 px-8 rounded-lg transition-all duration-300 shadow-2xl hover:shadow-3xl transform hover:-translate-y-1"
           >
             <Phone className="w-6 h-6" />
             <span className="text-lg">+40 123 456 789</span>
           </a>
-          <p className="text-accent-100 mt-6 text-sm">
+          <p className="text-primary-100 mt-6 text-sm">
             Luni - Vineri: 8:00 - 17:00
           </p>
         </div>

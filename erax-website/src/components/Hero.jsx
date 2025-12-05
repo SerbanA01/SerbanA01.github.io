@@ -57,7 +57,7 @@ const Hero = () => {
             {/* Background with gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 via-gray-900/70 to-transparent z-10" />
             
-            {/* Placeholder for image - will be replaced with actual images */}
+            {/* Placeholder for image - Only primary blue */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary-900 via-primary-700 to-primary-500">
               <div className="absolute inset-0 opacity-20" 
                    style={{
@@ -78,7 +78,7 @@ const Hero = () => {
                   </p>
                   <Link 
                     to={slide.link}
-                    className="inline-block bg-accent-500 hover:bg-accent-600 text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                    className="inline-block bg-primary-500 hover:bg-primary-600 text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                   >
                     {slide.linkText}
                   </Link>
