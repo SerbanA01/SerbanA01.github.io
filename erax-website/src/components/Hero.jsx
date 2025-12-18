@@ -48,46 +48,45 @@ const Hero = () => {
       <section className="relative h-screen overflow-hidden">
         {/* Slides */}
         {slides.map((slide, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ${
-              index === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'
-            }`}
+  <div
+    key={index}
+    className={`absolute inset-0 transition-opacity duration-1000 ${
+      index === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'
+    }`}
+  >
+{/* Background Image */}
+<div 
+  className="absolute inset-0 bg-center bg-no-repeat"
+  style={{
+    backgroundImage: `url(/images/edited/carousel/carouselimg${index + 1}.png)`,
+    backgroundSize: index === 0 || index === 2 || index == 1 ? '100% 90%' : 'cover'
+  }}
+/>
+
+    {/* Lighter gradient overlay - shows more of the image */}
+    <div className="absolute inset-0 bg-gradient-to-r from-gray-900/70 via-gray-900/40 to-transparent z-10" />
+
+    {/* Content */}
+    <div className="relative z-20 h-full flex items-center">
+      <div className="container-custom">
+        <div className="max-w-3xl">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-2xl">
+            {slide.title}
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-200 mb-8 leading-relaxed drop-shadow-lg">
+            {slide.description}
+          </p>
+          <Link 
+            to={slide.link}
+            className="inline-block bg-primary-500 hover:bg-primary-600 text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           >
-            {/* Background with gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 via-gray-900/70 to-transparent z-10" />
-            
-            {/* Placeholder for image - Only primary blue */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary-900 via-primary-700 to-primary-500">
-              <div className="absolute inset-0 opacity-20" 
-                   style={{
-                     backgroundImage: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")'
-                   }}
-              />
-            </div>
-
-            {/* Content */}
-            <div className="relative z-20 h-full flex items-center">
-              <div className="container-custom">
-                <div className="max-w-3xl">
-                  <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-                    {slide.title}
-                  </h1>
-                  <p className="text-xl md:text-2xl text-gray-200 mb-8 leading-relaxed">
-                    {slide.description}
-                  </p>
-                  <Link 
-                    to={slide.link}
-                    className="inline-block bg-primary-500 hover:bg-primary-600 text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-                  >
-                    {slide.linkText}
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
-
+            {slide.linkText}
+          </Link>
+        </div>
+      </div>
+    </div>
+  </div>
+))}
         {/* Navigation Arrows */}
         <button
           onClick={prevSlide}

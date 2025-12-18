@@ -9,10 +9,11 @@ import DespreNoi from './pages/DespreNoi'
 import Contact from './pages/Contact'
 import Portofoliu from './pages/Portofoliu'
 import EstimatorCost from './pages/EstimatorCost'
-
+import ScrollToTop from './components/ScrollToTop'; // Import the component
 function App() {
   return (
     <div className="min-h-screen flex flex-col">
+      <ScrollToTop /> 
       <Navbar />
       <main className="flex-grow">
         <Routes>

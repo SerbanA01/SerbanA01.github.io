@@ -51,7 +51,7 @@ const DespreNoi = () => {
     {
       icon: Target,
       title: 'Experiență',
-      stat: '10+ ani',
+      stat: '15+ ani',
       description: 'Cu peste un deceniu în industrie, folosim toate cunoștințele pentru a transforma provocările tale în succes.'
     },
     {
@@ -225,7 +225,7 @@ const DespreNoi = () => {
               Viziunea Noastră
             </h2>
             <p className="text-xl md:text-2xl text-primary-100 leading-relaxed">
-              Viziunea noastră este să continuăm această călătorie de evoluție, extinzându-ne pe piața internațională și devenind un nume de referință în domeniul structurilor metalice. Ne propunem să investim constant în oameni, tehnologie și procese, pentru a rămâne relevanți și competitivi într-o lume în continuă schimbare.
+              Viziunea noastră este să continuăm această călătorie de evoluție, extinzându-ne pe piața națională și devenind un nume de referință în domeniul structurilor metalice. Ne propunem să investim constant în oameni, tehnologie și procese, pentru a rămâne relevanți și competitivi într-o lume în continuă schimbare.
             </p>
           </div>
         </div>

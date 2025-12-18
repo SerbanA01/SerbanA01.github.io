@@ -18,9 +18,24 @@ const Servicii = () => {
     }
   }, [])
 
-  const toggleAccordion = (id) => {
-    setActiveAccordion(activeAccordion === id ? null : id)
+const toggleAccordion = (id) => {
+  // If clicking the same accordion, just toggle it
+  if (activeAccordion === id) {
+    setActiveAccordion(null)
+    return
   }
+  
+  // Open the new accordion first
+  setActiveAccordion(id)
+  
+  // Then scroll to it after it starts opening
+  setTimeout(() => {
+    const element = document.getElementById(id)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, 100) // Small delay to let the accordion start opening
+}
 
   const services = [
     {
@@ -28,21 +43,20 @@ const Servicii = () => {
       title: 'Structuri metalice',
       subtitle: 'Producție de Precizie pentru Structuri Metalice Durabile',
       icon: Building2,
-      image: '/images/structuri_metalice.jpg'
-    },
+      image: '/images/edited/servicii/servicii_1.png'    },
     {
       id: 'piese_agricole',
       title: 'Piese și accesorii agricole',
       subtitle: 'Crește Eficiența Lucrărilor Agricole\nPiese de Precizie, Adaptate Nevoilor Tale',
       icon: Wrench,
-      image: '/images/piese_agricole.jpg'
+      image: '/images/edited/servicii/servicii_2.png'
     },
     {
       id: 'metalurgie_arhitecturala',
       title: 'Metalurgie arhitecturală',
       subtitle: 'Spații de Locuit pe Structură Metalică\nMetalurgia Întâlnește Arhitectura',
       icon: Home,
-      image: '/images/metalurgie.jpg'
+      image: '/images/edited/servicii/servicii_3.png'
     }
   ]
 
@@ -75,13 +89,15 @@ const Servicii = () => {
                       top: `${150 + index * 20}px`
                     }}
                   >
-                    {/* Placeholder for image */}
-                    <div className="h-48 bg-gradient-to-br from-primary-400 to-primary-600 relative overflow-hidden">
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <Icon className="w-24 h-24 text-white/30" />
+                    {/* Service Image */}
+                      <div className="h-48 relative overflow-hidden">
+                        <img 
+                          src={service.image} 
+                          alt={service.title}
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent" />
                       </div>
-                      <div className="absolute inset-0 bg-black/20" />
-                    </div>
                     
                     <div className="p-8 text-center">
                       <h3 className="text-2xl font-bold text-gray-900 mb-4">
@@ -92,14 +108,18 @@ const Servicii = () => {
                       </p>
                       
                       <a
-                        href={`#${service.id}`}
-                        onClick={(e) => {
-                          e.preventDefault()
-                          setActiveAccordion(activeAccordion === service.id ? null : service.id)
-                          window.location.hash = `#${service.id}`
-                        }}
-                        className="inline-block bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
-                      >
+                       href={`#${service.id}`}
+                       onClick={(e) => {
+                         e.preventDefault()
+                         setActiveAccordion(service.id)
+                         setTimeout(() => {
+                           const element = document.getElementById(service.id)
+                           if (element) {
+                             element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                           }
+                         }, 100)
+                       }}
+                       className="inline-block bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"                      >
                         Află mai mult
                       </a>
                     </div>
@@ -208,13 +228,14 @@ const StructuriMetaliceContent = () => {
         </div>
       </div>
 
-      {/* Image Placeholder */}
-      <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl h-96 flex items-center justify-center">
-        <div className="text-center">
-          <Building2 className="w-24 h-24 text-gray-400 mx-auto mb-4" />
-          <p className="text-gray-500 text-lg">Galerie de imagini - Structuri Metalice</p>
+      {/* Structuri Metalice Gallery Image */}
+        <div className="rounded-2xl h-[32rem] overflow-hidden shadow-lg">
+          <img 
+            src="/images/edited/servicii/servicii_4.png"
+            alt="Galerie structuri metalice"
+            className="w-full h-full object-cover"
+          />
         </div>
-      </div>
 
       {/* De ce să alegi EraX */}
       <div>
@@ -314,13 +335,14 @@ const PieseAgricoleContent = () => {
         </div>
       </div>
 
-      {/* Image Placeholder */}
-      <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl h-96 flex items-center justify-center">
-        <div className="text-center">
-          <Wrench className="w-24 h-24 text-gray-400 mx-auto mb-4" />
-          <p className="text-gray-500 text-lg">Galerie de imagini - Piese Agricole</p>
+      {/* Piese Agricole Gallery Image */}
+        <div className="rounded-2xl h-[32rem] overflow-hidden shadow-lg bg-gray-100">
+          <img 
+            src="/images/edited/servicii/servicii_5.png"
+            alt="Galerie piese agricole"
+            className="w-full h-full object-contain"
+          />
         </div>
-      </div>
 
       {/* Produse oferite */}
       <div>
@@ -441,13 +463,14 @@ const MetalurgieArhitecturalaContent = () => {
         </div>
       </div>
 
-      {/* Image Placeholder */}
-      <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl h-96 flex items-center justify-center">
-        <div className="text-center">
-          <Home className="w-24 h-24 text-gray-400 mx-auto mb-4" />
-          <p className="text-gray-500 text-lg">Galerie de imagini - Locuințe Modulare</p>
-        </div>
-      </div>
+      {/* Metalurgie Gallery Image */}
+          <div className="rounded-2xl h-[32rem] overflow-hidden shadow-lg">
+            <img 
+              src="/images/edited/servicii/servicii_6_2.png"
+              alt="Galerie locuințe modulare"
+              className="w-full h-full object-cover"
+            />
+          </div>
 
       {/* Rescriem Regulile */}
       <div>
@@ -455,8 +478,12 @@ const MetalurgieArhitecturalaContent = () => {
           Rescriem Regulile Construcției Locuințelor cu Containere Modulare
         </h3>
         <div className="grid md:grid-cols-2 gap-8 items-start">
-          <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl h-64 flex items-center justify-center">
-            <Home className="w-20 h-20 text-gray-400" />
+          <div className="rounded-2xl h-64 overflow-hidden shadow-lg">
+              <img 
+                src="/images/edited/servicii/servicii_7.png"
+                alt="Detalii locuințe modulare"
+                className="w-full h-full object-cover"
+              />
           </div>
           <p className="text-lg text-gray-700 leading-relaxed">
             Pasiunea noastră pentru inovație și sustenabilitate ne inspiră să creăm locuințe nu doar confortabile, ci și eficiente și rentabile. Fiecare casă modulară este realizată cu precizie, folosind materiale de cea mai înaltă calitate și tehnici avansate de construcție. Prin angajamentul nostru față de excelență, creăm spații estetice și durabile.

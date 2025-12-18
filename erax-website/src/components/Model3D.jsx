@@ -1,28 +1,50 @@
-import React, { Suspense, useRef } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { OrbitControls, PerspectiveCamera, Environment } from '@react-three/drei'
+import React, { Suspense, useRef, useEffect } from 'react'
+import { Canvas, useFrame, useLoader } from '@react-three/fiber'
+import { OrbitControls, PerspectiveCamera, Environment, Center } from '@react-three/drei'
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
 import { Package } from 'lucide-react'
+import * as THREE from 'three'
 
-// Simple Cube as placeholder (no model loading to avoid errors)
-function PlaceholderCube() {
-  const meshRef = useRef()
-  
+// A-Frame Model Component
+function AFrameModel() {
+  const groupRef = useRef()
+  const obj = useLoader(OBJLoader, '/models/A_Frame.obj')
+
+  useEffect(() => {
+    if (obj) {
+      // Center the geometry
+      obj.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          child.geometry.center()
+        }
+      })
+    }
+  }, [obj])
+
   useFrame((state, delta) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y += delta * 0.3
-      meshRef.current.rotation.x += delta * 0.1
+    if (groupRef.current) {
+      groupRef.current.rotation.y += delta * 0.3
     }
   })
 
   return (
-    <mesh ref={meshRef} scale={1.5} castShadow receiveShadow>
-      <boxGeometry args={[2, 2, 2]} />
-      <meshStandardMaterial 
-        color="#005bb3" 
-        metalness={0.8} 
-        roughness={0.2} 
-      />
-    </mesh>
+    <Center>
+      <group ref={groupRef} position={[-3, 1.5, 0]}>
+        <primitive
+          object={obj}
+          scale={0.4}
+          castShadow
+          receiveShadow
+        >
+          <meshStandardMaterial
+            color="#005bb3"
+            metalness={0.8}
+            roughness={0.2}
+            attach="material"
+          />
+        </primitive>
+      </group>
+    </Center>
   )
 }
 
@@ -65,15 +87,15 @@ const Model3D = () => {
           <Environment preset="city" />
           
           {/* Camera */}
-          <PerspectiveCamera 
-            makeDefault 
-            position={[5, 3, 8]} 
+          <PerspectiveCamera
+            makeDefault
+            position={[5, 3, 8]}
             fov={50}
           />
-          
-          {/* Placeholder Cube */}
-          <PlaceholderCube />
-          
+
+          {/* A-Frame Model */}
+          <AFrameModel />
+
           {/* Ground plane for shadow */}
           <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -2, 0]} receiveShadow>
             <planeGeometry args={[20, 20]} />
@@ -98,7 +120,7 @@ const Model3D = () => {
       <div className="absolute bottom-4 left-4 right-4 text-center">
         <p className="text-sm text-gray-600 bg-white/80 backdrop-blur-sm rounded-lg px-4 py-2 inline-block">
           <Package className="w-4 h-4 inline-block mr-2" />
-          3D Model Preview - Add your .glb file to public/models/
+          A-Frame Structure - 3D Model Preview
         </p>
       </div>
     </div>

@@ -1,23 +1,44 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { Award, Users, Wrench, TrendingUp } from 'lucide-react'
 
 const AboutPreview = () => {
   const [count, setCount] = useState(0)
+  const [hasAnimated, setHasAnimated] = useState(false)
+  const counterRef = useRef(null)
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCount((prevCount) => {
-        if (prevCount < 15) {
-          return prevCount + 1
-        }
-        clearInterval(timer)
-        return prevCount
-      })
-    }, 100)
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAnimated) {
+            setHasAnimated(true)
 
-    return () => clearInterval(timer)
-  }, [])
+            const timer = setInterval(() => {
+              setCount((prevCount) => {
+                if (prevCount < 15) {
+                  return prevCount + 1
+                }
+                clearInterval(timer)
+                return prevCount
+              })
+            }, 100)
+          }
+        })
+      },
+      { threshold: 0.5 } // Trigger when 50% of the element is visible
+    )
+
+    if (counterRef.current) {
+      observer.observe(counterRef.current)
+    }
+
+    return () => {
+      if (counterRef.current) {
+        observer.unobserve(counterRef.current)
+      }
+    }
+  }, [hasAnimated])
 
   return (
     <section className="relative py-20 md:py-32 overflow-hidden">
@@ -41,7 +62,7 @@ const AboutPreview = () => {
           </p>
 
           {/* Counter */}
-          <div className="inline-flex items-center justify-center bg-white/10 backdrop-blur-md rounded-2xl p-8 mb-12 border border-white/20">
+          <div ref={counterRef} className="inline-flex items-center justify-center bg-white/10 backdrop-blur-md rounded-2xl p-8 mb-12 border border-white/20">
             <div className="text-center">
               <div className="flex items-baseline justify-center">
                 <span className="text-6xl md:text-7xl font-bold text-white">
