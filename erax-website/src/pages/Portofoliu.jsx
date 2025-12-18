@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Building2, Wrench, Home, TrendingUp, Users, Award, CheckCircle, X } from 'lucide-react'
 import { db } from '../firebase'
 import { collection, getDocs } from 'firebase/firestore'
+import Model3DViewer from '../components/Model3DViewer'
 
 const Portofoliu = () => {
   const [activeFilter, setActiveFilter] = useState('toate')
@@ -34,7 +35,15 @@ const Portofoliu = () => {
           id: doc.id,
           ...doc.data()
         }))
-        setProjects(projectsData)
+        // Filter only active projects
+        const activeProjects = projectsData.filter(project => project.isActive !== false)
+        // Sort by date - newest first
+        activeProjects.sort((a, b) => {
+          const dateA = new Date(a.date || `${a.year}-01-01`)
+          const dateB = new Date(b.date || `${b.year}-01-01`)
+          return dateB - dateA // Descending order (newest first)
+        })
+        setProjects(activeProjects)
       } catch (error) {
         console.error('Error fetching projects:', error)
       } finally {
@@ -155,10 +164,6 @@ const Portofoliu = () => {
                             {categories.find(c => c.id === project.category)?.label}
                           </span>
                         </div>
-                        {/* Year Badge */}
-                        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold text-gray-700">
-                          {project.year}
-                        </div>
                       </div>
 
                       {/* Project Info */}
@@ -169,6 +174,16 @@ const Portofoliu = () => {
                         <p className="text-gray-600 mb-4 leading-relaxed">
                           {project.shortDescription}
                         </p>
+                        <div className="flex items-center text-sm text-gray-500 mb-4">
+                          <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+                          </svg>
+                          {project.date ? new Date(project.date).toLocaleDateString('ro-RO', { 
+                            day: 'numeric', 
+                            month: 'long', 
+                            year: 'numeric' 
+                          }) : project.year}
+                        </div>
                         <div className="flex items-center text-sm text-gray-500 mb-4">
                           <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
@@ -218,6 +233,11 @@ const Portofoliu = () => {
 
             {/* Modal Content */}
             <div className="p-8">
+              {/* 3D Model Viewer */}
+              {selectedProject.model3D && selectedProject.model3D.type !== 'none' && (
+                <Model3DViewer model3D={selectedProject.model3D} />
+              )}
+
               {/* Image Gallery */}
               <div className="mb-6">
                 {selectedProject.images && selectedProject.images.length > 0 ? (
@@ -269,7 +289,7 @@ const Portofoliu = () => {
                 {selectedProject.title}
               </h2>
 
-              {/* Location & Year */}
+              {/* Location & Date */}
               <div className="flex items-center gap-6 text-gray-600 mb-6">
                 <div className="flex items-center">
                   <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
@@ -281,7 +301,11 @@ const Portofoliu = () => {
                   <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
                   </svg>
-                  {selectedProject.year}
+                  {selectedProject.date ? new Date(selectedProject.date).toLocaleDateString('ro-RO', { 
+                    day: 'numeric', 
+                    month: 'long', 
+                    year: 'numeric' 
+                  }) : selectedProject.year}
                 </div>
               </div>
 
