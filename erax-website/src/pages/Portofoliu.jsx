@@ -1,80 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Building2, Wrench, Home, TrendingUp, Users, Award, CheckCircle, X } from 'lucide-react'
+import { db } from '../firebase'
+import { collection, getDocs } from 'firebase/firestore'
 
 const Portofoliu = () => {
   const [activeFilter, setActiveFilter] = useState('toate')
   const [selectedProject, setSelectedProject] = useState(null)
-
-  // Project data matching your available photos
-  const projects = [
-    {
-      id: 1,
-      title: 'Hală Industrială Premium',
-      category: 'structuri_metalice',
-      description: 'Structură metalică pentru depozitare industrială, cu rezistență înaltă și design modern.',
-      shortDescription: 'Structură metalică de mare capacitate pentru depozitare industrială.',
-      image: '/images/edited/portofoliu/hala/hala_1_0.png',
-      images: ['/images/edited/portofoliu/hala/hala_1_1.png', '/images/edited/portofoliu/hala/hala_1_2.png','/images/edited/portofoliu/hala/hala_1_3.png' ], // Can add more images later
-      year: '2024',
-      location: 'România',
-      details: {
-        suprafata: '2000 mp',
-        materiale: 'Oțel structural certificat',
-        durata: '3 luni',
-        caracteristici: [
-          'Structură metalică rezistentă',
-          'Acoperire completă',
-          'Rezistență la intemperii',
-          'Montaj rapid și eficient'
-        ]
-      }
-    },
-    {
-      id: 2,
-      title: 'Casă Modulară Contemporană',
-      category: 'metalurgie_arhitecturala',
-      description: 'Locuință modulară pe structură metalică cu design modern și eficiență energetică.',
-      shortDescription: 'Locuință modulară pe structură metalică, design modern.',
-      image: '/images/edited/portofoliu/mhouse/mhouse_1_0.png',
-      images: ['/images/edited/portofoliu/mhouse/mhouse_1_1.png', '/images/edited/portofoliu/mhouse/mhouse_1_2.png', '/images/edited/portofoliu/mhouse/mhouse_1_3.png'],
-      year: '2024',
-      location: 'România',
-      details: {
-        suprafata: '40 mp',
-        materiale: 'Structură metalică + finisaje premium',
-        durata: '2 luni',
-        caracteristici: [
-          'Design arhitectural modern',
-          'Eficiență energetică',
-          'Montaj rapid',
-          'Personalizare completă'
-        ]
-      }
-    },
-    {
-      id: 3,
-      title: 'Piese Utilaje Agricole - Set 2',
-      category: 'piese_agricole',
-      description: 'Componente metalice de precizie pentru tractoare și utilaje agricole profesionale.',
-      shortDescription: 'Componente metalice pentru echipamente agricole.',
-      image: '/images/edited/portofoliu/piesa/piesa_2_0.png',
-      images: ['/images/edited/portofoliu/piesa/piesa_2_0.png','/images/edited/portofoliu/piesa/piesa_1_0.png','/images/edited/portofoliu/piesa/piesa_1_2.png'],
-      year: '2024',
-      location: 'România',
-      details: {
-        tip: 'Componente tractoare',
-        materiale: 'Oțel de înaltă calitate',
-        durata: '2 săptămâni',
-        caracteristici: [
-          'Fabricație la comandă',
-          'Testare în condiții reale',
-          'Garanție extinsă',
-          'Suport tehnic inclus'
-        ]
-      }
-    }
-  ]
+  const [projects, setProjects] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const categories = [
     { id: 'toate', label: 'Toate Proiectele', icon: TrendingUp },
@@ -89,6 +23,27 @@ const Portofoliu = () => {
     { number: '15+', label: 'Ani de Experiență', icon: Award },
     { number: '100%', label: 'Rate de Satisfacție', icon: TrendingUp }
   ]
+
+  // Fetch projects from Firebase
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        setLoading(true)
+        const querySnapshot = await getDocs(collection(db, 'projects'))
+        const projectsData = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }))
+        setProjects(projectsData)
+      } catch (error) {
+        console.error('Error fetching projects:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchProjects()
+  }, [])
 
   const filteredProjects = activeFilter === 'toate' 
     ? projects 
@@ -114,12 +69,12 @@ const Portofoliu = () => {
 
   const openModal = (project) => {
     setSelectedProject(project)
-    document.body.style.overflow = 'hidden' // Prevent background scroll
+    document.body.style.overflow = 'hidden'
   }
 
   const closeModal = () => {
     setSelectedProject(null)
-    document.body.style.overflow = 'unset' // Restore scroll
+    document.body.style.overflow = 'unset'
   }
 
   return (
@@ -172,64 +127,73 @@ const Portofoliu = () => {
       {/* Projects Grid */}
       <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
         <div className="container-custom">
-          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {filteredProjects.map((project) => {
-              const CategoryIcon = getCategoryIcon(project.category)
-              return (
-                <div
-                  key={project.id}
-                  className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group"
-                >
-                  {/* Project Image */}
-                  <div className="relative h-64 overflow-hidden">
-                    <img 
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    {/* Category Badge */}
-                    <div className="absolute top-4 left-4">
-                      <span className={`px-4 py-2 rounded-full text-sm font-semibold border-2 backdrop-blur-sm ${getCategoryColor(project.category)}`}>
-                        {categories.find(c => c.id === project.category)?.label}
-                      </span>
-                    </div>
-                    {/* Year Badge */}
-                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold text-gray-700">
-                      {project.year}
-                    </div>
-                  </div>
-
-                  {/* Project Info */}
-                  <div className="p-6">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors duration-200">
-                      {project.title}
-                    </h3>
-                    <p className="text-gray-600 mb-4 leading-relaxed">
-                      {project.shortDescription}
-                    </p>
-                    <div className="flex items-center text-sm text-gray-500 mb-4">
-                      <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                      </svg>
-                      {project.location}
-                    </div>
-                    <button 
-                      onClick={() => openModal(project)}
-                      className="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
-                    >
-                      Vezi Detalii
-                    </button>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-
-          {/* No results message */}
-          {filteredProjects.length === 0 && (
+          {loading ? (
             <div className="text-center py-20">
-              <p className="text-xl text-gray-500">Nu s-au găsit proiecte în această categorie.</p>
+              <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-primary-600 border-t-transparent"></div>
+              <p className="mt-4 text-gray-600">Se încarcă proiectele...</p>
             </div>
+          ) : (
+            <>
+              <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                {filteredProjects.map((project) => {
+                  const CategoryIcon = getCategoryIcon(project.category)
+                  return (
+                    <div
+                      key={project.id}
+                      className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group"
+                    >
+                      {/* Project Image */}
+                      <div className="relative h-64 overflow-hidden">
+                        <img 
+                          src={project.image}
+                          alt={project.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                        {/* Category Badge */}
+                        <div className="absolute top-4 left-4">
+                          <span className={`px-4 py-2 rounded-full text-sm font-semibold border-2 backdrop-blur-sm ${getCategoryColor(project.category)}`}>
+                            {categories.find(c => c.id === project.category)?.label}
+                          </span>
+                        </div>
+                        {/* Year Badge */}
+                        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold text-gray-700">
+                          {project.year}
+                        </div>
+                      </div>
+
+                      {/* Project Info */}
+                      <div className="p-6">
+                        <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors duration-200">
+                          {project.title}
+                        </h3>
+                        <p className="text-gray-600 mb-4 leading-relaxed">
+                          {project.shortDescription}
+                        </p>
+                        <div className="flex items-center text-sm text-gray-500 mb-4">
+                          <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                          </svg>
+                          {project.location}
+                        </div>
+                        <button 
+                          onClick={() => openModal(project)}
+                          className="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
+                        >
+                          Vezi Detalii
+                        </button>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+
+              {/* No results message */}
+              {filteredProjects.length === 0 && !loading && (
+                <div className="text-center py-20">
+                  <p className="text-xl text-gray-500">Nu s-au găsit proiecte în această categorie.</p>
+                </div>
+              )}
+            </>
           )}
         </div>
       </section>
@@ -255,43 +219,43 @@ const Portofoliu = () => {
             {/* Modal Content */}
             <div className="p-8">
               {/* Image Gallery */}
-<div className="mb-6">
-  {selectedProject.images && selectedProject.images.length > 0 ? (
-    <div className="space-y-4">
-      {/* Main/Cover Image */}
-      <div className="rounded-xl overflow-hidden">
-        <img 
-          src={selectedProject.image}
-          alt={selectedProject.title}
-          className="w-full h-96 object-cover"
-        />
-      </div>
-      
-      {/* Additional Images Grid */}
-      {selectedProject.images.length > 0 && (
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {selectedProject.images.map((img, index) => (
-            <div key={index} className="rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-200 cursor-pointer">
-              <img 
-                src={img}
-                alt={`${selectedProject.title} - Image ${index + 1}`}
-                className="w-full h-48 object-cover hover:scale-110 transition-transform duration-300"
-              />
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  ) : (
-    <div className="rounded-xl overflow-hidden">
-      <img 
-        src={selectedProject.image}
-        alt={selectedProject.title}
-        className="w-full h-96 object-cover"
-      />
-    </div>
-  )}
-</div>
+              <div className="mb-6">
+                {selectedProject.images && selectedProject.images.length > 0 ? (
+                  <div className="space-y-4">
+                    {/* Main/Cover Image */}
+                    <div className="rounded-xl overflow-hidden">
+                      <img 
+                        src={selectedProject.image}
+                        alt={selectedProject.title}
+                        className="w-full h-96 object-cover"
+                      />
+                    </div>
+                    
+                    {/* Additional Images Grid */}
+                    {selectedProject.images.length > 0 && (
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        {selectedProject.images.map((img, index) => (
+                          <div key={index} className="rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-200 cursor-pointer">
+                            <img 
+                              src={img}
+                              alt={`${selectedProject.title} - Image ${index + 1}`}
+                              className="w-full h-48 object-cover hover:scale-110 transition-transform duration-300"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className="rounded-xl overflow-hidden">
+                    <img 
+                      src={selectedProject.image}
+                      alt={selectedProject.title}
+                      className="w-full h-96 object-cover"
+                    />
+                  </div>
+                )}
+              </div>
 
               {/* Category Badge */}
               <div className="mb-4">
@@ -327,31 +291,37 @@ const Portofoliu = () => {
               </p>
 
               {/* Project Details */}
-              <div className="bg-gray-50 rounded-xl p-6 mb-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Detalii Proiect</h3>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {Object.entries(selectedProject.details).filter(([key]) => key !== 'caracteristici').map(([key, value]) => (
-                    <div key={key}>
-                      <span className="text-sm text-gray-500 capitalize">{key.replace('_', ' ')}:</span>
-                      <p className="text-gray-900 font-semibold">{value}</p>
+              {selectedProject.details && (
+                <>
+                  <div className="bg-gray-50 rounded-xl p-6 mb-6">
+                    <h3 className="text-xl font-bold text-gray-900 mb-4">Detalii Proiect</h3>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      {Object.entries(selectedProject.details).filter(([key]) => key !== 'caracteristici').map(([key, value]) => (
+                        value && (
+                          <div key={key}>
+                            <span className="text-sm text-gray-500 capitalize">{key.replace('_', ' ')}:</span>
+                            <p className="text-gray-900 font-semibold">{value}</p>
+                          </div>
+                        )
+                      ))}
                     </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Caracteristici */}
-              {selectedProject.details.caracteristici && (
-                <div className="mb-8">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">Caracteristici</h3>
-                  <div className="grid md:grid-cols-2 gap-3">
-                    {selectedProject.details.caracteristici.map((item, index) => (
-                      <div key={index} className="flex items-start space-x-2">
-                        <CheckCircle className="w-5 h-5 text-primary-600 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-700">{item}</span>
-                      </div>
-                    ))}
                   </div>
-                </div>
+
+                  {/* Caracteristici */}
+                  {selectedProject.details.caracteristici && selectedProject.details.caracteristici.length > 0 && (
+                    <div className="mb-8">
+                      <h3 className="text-xl font-bold text-gray-900 mb-4">Caracteristici</h3>
+                      <div className="grid md:grid-cols-2 gap-3">
+                        {selectedProject.details.caracteristici.map((item, index) => (
+                          <div key={index} className="flex items-start space-x-2">
+                            <CheckCircle className="w-5 h-5 text-primary-600 flex-shrink-0 mt-0.5" />
+                            <span className="text-gray-700">{item}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </>
               )}
 
               {/* CTA Buttons */}
