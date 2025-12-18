@@ -51,7 +51,7 @@ const DespreNoi = () => {
     {
       icon: Target,
       title: 'Experiență',
-      stat: '10+ ani',
+      stat: '15+ ani',
       description: 'Cu peste un deceniu în industrie, folosim toate cunoștințele pentru a transforma provocările tale în succes.'
     },
     {
@@ -104,20 +104,20 @@ const DespreNoi = () => {
         <div className="container-custom relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center justify-center w-20 h-20 bg-white/10 backdrop-blur-sm rounded-full mb-6">
-              <Sparkles className="w-10 h-10 text-accent-400" />
+              <Sparkles className="w-10 h-10 text-primary-400" />
             </div>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
               Meșteri în Fabricarea Structurilor Metalice
             </h1>
             <p className="text-xl md:text-2xl text-gray-200 leading-relaxed">
-              <strong className="text-accent-400">EraX</strong> este mai mult decât un brand specializat în structuri metalice – suntem profesioniști cu rigori inginerești și dăruire de artizani. Dedicăm totul preciziei și inovației, cu scopul constant de a atinge excelența.
+              <strong className="text-primary-400">EraX</strong> este mai mult decât un brand specializat în structuri metalice – suntem profesioniști cu rigori inginerești și dăruire de artizani. Dedicăm totul preciziei și inovației, cu scopul constant de a atinge excelența.
             </p>
           </div>
         </div>
 
         {/* Decorative elements */}
         <div className="absolute top-20 left-10 w-72 h-72 bg-primary-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl" />
       </section>
 
       {/* Timeline Section - Company Story */}
@@ -219,13 +219,13 @@ const DespreNoi = () => {
         <div className="container-custom relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center justify-center w-20 h-20 bg-white/10 backdrop-blur-sm rounded-full mb-6">
-              <Target className="w-10 h-10 text-accent-400" />
+              <Target className="w-10 h-10 text-primary-400" />
             </div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
               Viziunea Noastră
             </h2>
             <p className="text-xl md:text-2xl text-primary-100 leading-relaxed">
-              Viziunea noastră este să continuăm această călătorie de evoluție, extinzându-ne pe piața internațională și devenind un nume de referință în domeniul structurilor metalice. Ne propunem să investim constant în oameni, tehnologie și procese, pentru a rămâne relevanți și competitivi într-o lume în continuă schimbare.
+              Viziunea noastră este să continuăm această călătorie de evoluție, extinzându-ne pe piața națională și devenind un nume de referință în domeniul structurilor metalice. Ne propunem să investim constant în oameni, tehnologie și procese, pentru a rămâne relevanți și competitivi într-o lume în continuă schimbare.
             </p>
           </div>
         </div>
@@ -273,24 +273,24 @@ const DespreNoi = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-accent-500 to-accent-700">
+      <section className="py-20 bg-gradient-to-r from-primary-500 to-primary-700">
         <div className="container-custom text-center">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
             Hai să construim împreună viitorul
           </h2>
-          <p className="text-xl text-accent-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
             Fie că ai un proiect mare sau unul mai mic, suntem aici să transformăm ideile în realitate cu structuri metalice de calitate superioară.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/contact"
-              className="inline-block bg-white text-accent-700 hover:bg-gray-100 font-bold py-4 px-8 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="inline-block bg-white text-primary-700 hover:bg-gray-100 font-bold py-4 px-8 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               Contactează-ne
             </Link>
             <Link
               to="/portofoliu"
-              className="inline-block bg-accent-600 hover:bg-accent-800 text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 border-2 border-white/30 hover:border-white"
+              className="inline-block bg-primary-600 hover:bg-primary-800 text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 border-2 border-white/30 hover:border-white"
             >
               Vezi Portofoliul
             </Link>

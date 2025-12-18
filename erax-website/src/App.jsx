@@ -9,10 +9,13 @@ import DespreNoi from './pages/DespreNoi'
 import Contact from './pages/Contact'
 import Portofoliu from './pages/Portofoliu'
 import EstimatorCost from './pages/EstimatorCost'
+import AdminPanel from './pages/AdminPanel'
+import ScrollToTop from './components/ScrollToTop'
 
 function App() {
   return (
     <div className="min-h-screen flex flex-col">
+      <ScrollToTop /> 
       <Navbar />
       <main className="flex-grow">
         <Routes>
@@ -27,6 +30,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/portofoliu" element={<Portofoliu />} />
           <Route path="/estimator-cost" element={<EstimatorCost />} />
+          <Route path="/admin" element={<AdminPanel />} />
         </Routes>
       </main>
       <Footer />

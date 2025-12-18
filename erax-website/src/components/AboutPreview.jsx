@@ -1,23 +1,44 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { Award, Users, Wrench, TrendingUp } from 'lucide-react'
 
 const AboutPreview = () => {
   const [count, setCount] = useState(0)
+  const [hasAnimated, setHasAnimated] = useState(false)
+  const counterRef = useRef(null)
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCount((prevCount) => {
-        if (prevCount < 10) {
-          return prevCount + 1
-        }
-        clearInterval(timer)
-        return prevCount
-      })
-    }, 100)
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAnimated) {
+            setHasAnimated(true)
 
-    return () => clearInterval(timer)
-  }, [])
+            const timer = setInterval(() => {
+              setCount((prevCount) => {
+                if (prevCount < 15) {
+                  return prevCount + 1
+                }
+                clearInterval(timer)
+                return prevCount
+              })
+            }, 100)
+          }
+        })
+      },
+      { threshold: 0.5 } // Trigger when 50% of the element is visible
+    )
+
+    if (counterRef.current) {
+      observer.observe(counterRef.current)
+    }
+
+    return () => {
+      if (counterRef.current) {
+        observer.unobserve(counterRef.current)
+      }
+    }
+  }, [hasAnimated])
 
   return (
     <section className="relative py-20 md:py-32 overflow-hidden">
@@ -41,13 +62,13 @@ const AboutPreview = () => {
           </p>
 
           {/* Counter */}
-          <div className="inline-flex items-center justify-center bg-white/10 backdrop-blur-md rounded-2xl p-8 mb-12 border border-white/20">
+          <div ref={counterRef} className="inline-flex items-center justify-center bg-white/10 backdrop-blur-md rounded-2xl p-8 mb-12 border border-white/20">
             <div className="text-center">
               <div className="flex items-baseline justify-center">
                 <span className="text-6xl md:text-7xl font-bold text-white">
                   {count}
                 </span>
-                <span className="text-5xl md:text-6xl font-bold text-accent-400 ml-2">
+                <span className="text-5xl md:text-6xl font-bold text-primary-200 ml-2">
                   +
                 </span>
               </div>
@@ -67,19 +88,19 @@ const AboutPreview = () => {
           {/* Features Grid */}
           <div className="grid md:grid-cols-4 gap-8 mb-12">
             <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300">
-              <Award className="w-12 h-12 text-accent-400 mx-auto mb-4" />
+              <Award className="w-12 h-12 text-primary-200 mx-auto mb-4" />
               <h3 className="text-white font-semibold text-lg">Calitate Superioară</h3>
             </div>
             <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300">
-              <Users className="w-12 h-12 text-accent-400 mx-auto mb-4" />
+              <Users className="w-12 h-12 text-primary-200 mx-auto mb-4" />
               <h3 className="text-white font-semibold text-lg">Echipă Experimentată</h3>
             </div>
             <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300">
-              <Wrench className="w-12 h-12 text-accent-400 mx-auto mb-4" />
+              <Wrench className="w-12 h-12 text-primary-200 mx-auto mb-4" />
               <h3 className="text-white font-semibold text-lg">Soluții Complete</h3>
             </div>
             <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300">
-              <TrendingUp className="w-12 h-12 text-accent-400 mx-auto mb-4" />
+              <TrendingUp className="w-12 h-12 text-primary-200 mx-auto mb-4" />
               <h3 className="text-white font-semibold text-lg">Inovație Continuă</h3>
             </div>
           </div>
