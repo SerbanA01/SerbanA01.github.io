@@ -23,12 +23,31 @@ const Navbar = () => {
   const handleServicesClick = (e) => {
     e.preventDefault()
     navigate('/servicii')
+    setIsOpen(false) 
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  const handleServiceLink = (hash) => {
+const handleServiceLink = (hash) => {
+  setIsOpen(false)
+  
+  // Check if we're already on the servicii page
+  if (window.location.pathname === '/servicii') {
+    // We're already on the page, so manually trigger the accordion
+    const sectionId = hash.substring(1) // Remove the '#'
+    
+    // Dispatch a custom event that the Servicii component can listen to
+    window.dispatchEvent(new CustomEvent('openAccordion', { detail: sectionId }))
+    
+    // Scroll to the section
+    setTimeout(() => {
+      const element = document.querySelector(hash)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    }, 100)
+  } else {
+    // Navigate to the page with the hash
     navigate(`/servicii${hash}`)
-    setIsOpen(false)
     setTimeout(() => {
       const element = document.querySelector(hash)
       if (element) {
@@ -36,6 +55,7 @@ const Navbar = () => {
       }
     }, 100)
   }
+}
 
   return (
     <nav 

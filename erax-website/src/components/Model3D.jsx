@@ -63,8 +63,7 @@ function Loader() {
 // Main 3D Model Container
 const Model3D = () => {
   return (
-    <div className="w-full h-[500px] bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl shadow-xl overflow-hidden border border-gray-200 relative">
-      <Canvas
+    <div className="w-full max-w-full h-[400px] md:h-[500px] bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl shadow-xl overflow-hidden border border-gray-200 relative">      <Canvas
         shadows
         dpr={[1, 2]}
         gl={{ antialias: true, alpha: false }}
@@ -117,9 +116,9 @@ const Model3D = () => {
       </Canvas>
       
       {/* Overlay text */}
-      <div className="absolute bottom-4 left-4 right-4 text-center">
-        <p className="text-sm text-gray-600 bg-white/80 backdrop-blur-sm rounded-lg px-4 py-2 inline-block">
-          <Package className="w-4 h-4 inline-block mr-2" />
+      <div className="absolute bottom-2 md:bottom-4 left-2 md:left-4 right-2 md:right-4 text-center">
+        <p className="text-xs md:text-sm text-gray-600 bg-white/80 backdrop-blur-sm rounded-lg px-2 md:px-4 py-1 md:py-2 inline-block">
+          <Package className="w-3 h-3 md:w-4 md:h-4 inline-block mr-1 md:mr-2" />
           A-Frame Structure - 3D Model Preview
         </p>
       </div>

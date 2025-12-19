@@ -109,29 +109,30 @@ const Portofoliu = () => {
       </section>
 
       {/* Filter Tabs */}
-      <section className="py-12 bg-white border-b-2 border-gray-200 sticky top-20 z-40">
-        <div className="container-custom">
-          <div className="flex flex-wrap justify-center gap-4">
-            {categories.map((category) => {
-              const Icon = category.icon
-              return (
-                <button
-                  key={category.id}
-                  onClick={() => setActiveFilter(category.id)}
-                  className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
-                    activeFilter === category.id
-                      ? 'bg-primary-600 text-white shadow-lg scale-105'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }`}
-                >
-                  <Icon className="w-5 h-5" />
-                  <span>{category.label}</span>
-                </button>
-              )
-            })}
-          </div>
-        </div>
-      </section>
+<section className="py-6 md:py-12 bg-white border-b-2 border-gray-200 sticky top-20 z-40">
+  <div className="container-custom">
+    <div className="flex flex-wrap justify-center gap-2 md:gap-4">
+      {categories.map((category) => {
+        const Icon = category.icon
+        return (
+          <button
+            key={category.id}
+            onClick={() => setActiveFilter(category.id)}
+            className={`flex items-center space-x-1 md:space-x-2 px-3 md:px-6 py-2 md:py-3 rounded-lg font-semibold text-sm md:text-base transition-all duration-300 ${
+              activeFilter === category.id
+                ? 'bg-primary-600 text-white shadow-lg scale-105'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            }`}
+          >
+            <Icon className="w-4 h-4 md:w-5 md:h-5" />
+            <span className="hidden sm:inline">{category.label}</span>
+            <span className="sm:hidden">{category.label.split(' ')[0]}</span>
+          </button>
+        )
+      })}
+    </div>
+  </div>
+</section>
 
       {/* Projects Grid */}
       <section className="py-20 bg-gradient-to-b from-gray-50 to-white">

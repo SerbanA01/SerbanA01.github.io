@@ -6,9 +6,19 @@ const Servicii = () => {
   const [activeAccordion, setActiveAccordion] = useState(null)
 
   // Scroll to section if hash is present in URL
-  useEffect(() => {
+  // Scroll to section if hash is present in URL
+// Scroll to section if hash is present in URL
+// Scroll to section if hash is present in URL
+useEffect(() => {
+  const handleHashChange = () => {
     const hash = window.location.hash
     if (hash) {
+      const sectionId = hash.substring(1) // Remove the '#'
+      
+      // Set the accordion to open
+      setActiveAccordion(sectionId)
+      
+      // Then scroll to it
       setTimeout(() => {
         const element = document.querySelector(hash)
         if (element) {
@@ -16,8 +26,35 @@ const Servicii = () => {
         }
       }, 100)
     }
-  }, [])
+  }
 
+  // Custom event handler for when already on the page
+  const handleOpenAccordion = (event) => {
+    const sectionId = event.detail
+    setActiveAccordion(sectionId)
+    
+    setTimeout(() => {
+      const element = document.getElementById(sectionId)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    }, 100)
+  }
+
+  // Handle initial load
+  handleHashChange()
+
+  // Listen for hash changes
+  window.addEventListener('hashchange', handleHashChange)
+  
+  // Listen for custom accordion open event
+  window.addEventListener('openAccordion', handleOpenAccordion)
+  
+  return () => {
+    window.removeEventListener('hashchange', handleHashChange)
+    window.removeEventListener('openAccordion', handleOpenAccordion)
+  }
+}, [])
 const toggleAccordion = (id) => {
   // If clicking the same accordion, just toggle it
   if (activeAccordion === id) {
